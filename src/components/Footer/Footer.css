@@ -1,0 +1,12 @@
+footer .footer-part2 .btn{
+    background-color: var(--main-color);
+    border: none;
+}
+footer img{
+    width: 100px;
+    height: fit-content;
+}
+footer .footer-part3 p{
+    margin: 0;
+    padding: 0;
+}
