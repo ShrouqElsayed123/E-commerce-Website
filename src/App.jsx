@@ -9,20 +9,30 @@ import Login from './pages/Login/Login'
 import Signup from './pages/Signup/Signup'
 import Layout from './components/Layout/Layout'
 import { Toaster } from 'react-hot-toast'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import GuestRoute from './components/GuestRoute/GuestRoute'
+import UserProvider from './components/context/User.context'
+import CardProvider from './components/context/Card.context'
 
 export default function App() {
 
   const x=createBrowserRouter([
-    {path:"/",element:<Layout/>,children:[
-      {path:"/login",element:<Login/>},
-      {path:"/signup",element:<Signup/>},
+    {path:"/",element:<ProtectedRoute><Layout/></ProtectedRoute>,children:[
       {index:true,element:<Home/>},
       {path:"/footer",element:<Footer/>},
       
+    ]},
+    {path:"/",element:<GuestRoute><Layout/></GuestRoute>,children:[
+      {path:"/login",element:<Login/>},
+      {path:"/signup",element:<Signup/>},
     ]}
   ])
  return (<>
+<UserProvider>
+<CardProvider>
 <RouterProvider router={x}></RouterProvider>
+</CardProvider>
+</UserProvider>
 <Toaster />
  </>)
 

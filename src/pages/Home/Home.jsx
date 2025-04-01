@@ -16,6 +16,8 @@ let [products,setProducts]=useState(null)
  
     let {data}=await axios.request(option)
     setProducts(data.data)
+    console.log(data);
+    
     
   }
   useEffect(()=>{ 
@@ -32,6 +34,7 @@ let [products,setProducts]=useState(null)
       price={product.price}
       imageCover={product.imageCover}
       ratingsAverage={product.ratingsAverage}
+      id={product.id}
       />)}
       </div>
     </div>

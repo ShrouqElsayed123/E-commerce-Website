@@ -6,9 +6,11 @@ import { object, string } from 'yup'
 // import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { tokenContext } from '../../components/context/User.context'
 
 export default function Login() {
+  let {setToken}=useContext(tokenContext)
   let [dataError,setDataError]=useState(null)
   const navigate=useNavigate()
 
@@ -29,6 +31,8 @@ async function sendDataToLogin (values) {
     }
    let {data}= await axios.request(options)
    if(data.message=="success"){
+    setToken(data.token);
+    localStorage.setItem("token",data.token)
     toast.success("You Login Successfully");
     setTimeout(()=>{navigate("/")},2000)
    }
